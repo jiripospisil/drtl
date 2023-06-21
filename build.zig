@@ -73,13 +73,30 @@ pub fn build(b: *std.Build) void {
 
     b.installArtifact(exe);
 
-    const run_cmd = b.addRunArtifact(exe);
-    run_cmd.step.dependOn(b.getInstallStep());
+    const release = b.step("release", "create binaries for common targets");
+    const release_targets = [_][]const u8{
+        "aarch64-linux", "aarch64-macos", "x86_64-linux", "x86-linux", "x86_64-macos",
+    };
 
-    if (b.args) |args| {
-        run_cmd.addArgs(args);
+    for (release_targets) |target_string| {
+        const rel_exe = b.addExecutable(.{
+            .name = "drtl",
+            .root_source_file = .{ .path = "src/main.zig" },
+            .target = std.zig.CrossTarget.parse(.{
+                .arch_os_abi = target_string,
+            }) catch unreachable,
+            .optimize = .ReleaseSafe,
+        });
+        rel_exe.strip = true;
+
+        embedData(b, rel_exe) catch |err| {
+            std.debug.panic("{any}", .{err});
+        };
+
+        const install = b.addInstallArtifact(rel_exe);
+        install.dest_dir = .prefix;
+        install.dest_sub_path = b.fmt("{s}-v{s}-{s}", .{ rel_exe.name, VERSION, target_string });
+
+        release.dependOn(&install.step);
     }
-
-    const run_step = b.step("run", "Run the app");
-    run_step.dependOn(&run_cmd.step);
 }
