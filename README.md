@@ -5,6 +5,12 @@ maintain a local database of tldr pages but rather embeds all of them in the bin
 
 <img width="972" alt="image" src="https://github.com/jiripospisil/drtl/assets/20820/364cb3c5-7ff2-4d9d-81ce-206c0e5306b8">
 
+## Installation on Arch Linux using AUR
+
+```
+paru -Sy drtl-bin
+```
+
 ## Usage
 
 ```
