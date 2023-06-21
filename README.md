@@ -3,7 +3,7 @@
 Yet another [tldr](https://github.com/tldr-pages/tldr) client. Written mostly as an exercise to try Zig. The client doesn't 
 maintain a local database of tldr pages but rather embeds all of them in the binary.
 
-<img width="972" alt="image" src="https://github.com/jiripospisil/drtl/assets/20820/7e1f960b-6516-44e6-ad66-2b8e918c60c9">
+<img width="972" alt="image" src="https://github.com/jiripospisil/drtl/assets/20820/364cb3c5-7ff2-4d9d-81ce-206c0e5306b8">
 
 ## Usage
 
