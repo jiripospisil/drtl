@@ -3,13 +3,16 @@
 Yet another [tldr](https://github.com/tldr-pages/tldr) client. Written mostly as an exercise to try Zig. The client doesn't 
 maintain a local database of tldr pages but rather embeds all of them in the binary.
 
-<img width="972" alt="image" src="https://github.com/jiripospisil/drtl/assets/20820/364cb3c5-7ff2-4d9d-81ce-206c0e5306b8">
+<img width="972" alt="image" src="https://github.com/jiripospisil/drtl/assets/20820/d40ee21a-2429-408f-9e96-26157beca855">
 
-## Installation on Arch Linux using AUR
+## Installation
 
 ```
+# On Arch Linux
 paru -Sy drtl-bin
 ```
+
+You can also just use the [prebuilt binaries](https://github.com/jiripospisil/drtl/releases) or build it yourself.
 
 ## Usage
 
