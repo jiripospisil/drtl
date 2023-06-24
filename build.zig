@@ -1,7 +1,7 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
-const VERSION = "0.0.1";
+const VERSION = "0.0.2";
 
 fn embedData(b: *std.Build, exe: *std.Build.Step.Compile) !void {
     var options = b.addOptions();
@@ -74,9 +74,7 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(exe);
 
     const release = b.step("release", "create binaries for common targets");
-    const release_targets = [_][]const u8{
-        "aarch64-linux", "aarch64-macos", "x86_64-linux", "x86-linux", "x86_64-macos",
-    };
+    const release_targets = [_][]const u8{ "aarch64-linux", "aarch64-macos", "x86_64-linux", "x86-linux", "x86_64-macos", "aarch64-windows", "x86_64-windows" };
 
     for (release_targets) |target_string| {
         const rel_exe = b.addExecutable(.{
