@@ -1,7 +1,7 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
-const VERSION = "0.0.6";
+const VERSION = "0.0.7";
 
 fn embedData(b: *std.Build, exe: *std.Build.Step.Compile) !void {
     var options = b.addOptions();
@@ -99,7 +99,7 @@ pub fn build(b: *std.Build) void {
             std.debug.panic("{any}", .{err});
         };
 
-        const install = b.addInstallArtifact(rel_exe);
+        const install = b.addInstallArtifact(rel_exe, .{});
         install.dest_dir = .prefix;
         install.dest_sub_path = b.fmt("{s}-v{s}-{s}", .{ rel_exe.name, VERSION, target_string });
 
