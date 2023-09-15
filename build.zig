@@ -1,7 +1,7 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
-const VERSION = "0.0.10";
+const VERSION = "0.0.11";
 
 fn embedData(b: *std.Build, exe: *std.Build.Step.Compile) !void {
     var options = b.addOptions();
