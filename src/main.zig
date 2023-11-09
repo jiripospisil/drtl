@@ -94,7 +94,15 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
         try list.append(try std.fmt.allocPrint(allocator, "{s}/{s}", .{ current_os, name }));
         try list.append(try std.fmt.allocPrint(allocator, "common/{s}", .{name}));
 
-        const categories = [_][]const u8{ "android", "linux", "osx", "sunos", "windows" };
+        const categories = [_][]const u8{
+            "android",
+            "linux",
+            "osx",
+            "sunos",
+            "windows",
+            "freebsd",
+            "openbsd",
+        };
         for (categories) |category| {
             if (!std.mem.eql(u8, current_os, category)) {
                 try list.append(try std.fmt.allocPrint(allocator, "{s}/{s}", .{ category, name }));
