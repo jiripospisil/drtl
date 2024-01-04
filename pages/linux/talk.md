@@ -1,6 +1,6 @@
 # talk
 
-> GNU/Talk is a visual communication program which copies lines from your terminal to that of another user.
+> A visual communication program which copies lines from your terminal to that of another user.
 > More information: <https://www.gnu.org/software/inetutils/manual/html_node/talk-invocation.html>.
 
 - Start a talk session with a user on the same machine:
@@ -17,8 +17,8 @@
 
 - Clear text on both terminal screens:
 
-`Ctrl+D`
+`<Ctrl>+D`
 
 - Exit the talk session:
 
-`Ctrl+C`
+`<Ctrl>+C`
