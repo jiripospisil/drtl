@@ -15,7 +15,7 @@ const pages_map = std.ComptimeStringMap([]const u8, load_pages: {
 
     // ought to be enough for anybody
     @setEvalBranchQuota(200_000);
-    inline for (embedded.pages, 0..) |name, i| {
+    for (embedded.pages, 0..) |name, i| {
         array[i] = .{ name[6..(name.len - 3)], @embedFile(name) };
     }
 
