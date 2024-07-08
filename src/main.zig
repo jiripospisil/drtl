@@ -1,6 +1,6 @@
 const std = @import("std");
 const builtin = @import("builtin");
-const embedded = @import("embedded");
+const config = @import("config");
 const File = std.fs.File;
 const ArenaAllocator = std.heap.ArenaAllocator;
 const Allocator = std.mem.Allocator;
@@ -11,11 +11,11 @@ const pages_map = std.StaticStringMap([]const u8).initComptime(load_pages: {
         []const u8,
     };
 
-    var array: [embedded.pages.len]Entry = undefined;
+    var array: [config.page_paths.len]Entry = undefined;
 
     // ought to be enough for anybody
     @setEvalBranchQuota(200_000);
-    for (embedded.pages, 0..) |name, i| {
+    for (config.page_paths, 0..) |name, i| {
         array[i] = .{ name[6..(name.len - 3)], @embedFile(name) };
     }
 
@@ -160,7 +160,7 @@ pub fn main() !void {
             }
 
             if (std.mem.eql(u8, arg, "-v") or std.mem.eql(u8, arg, "--version")) {
-                try stdout.writeAll(embedded.version);
+                try stdout.writeAll(config.version);
                 return std.process.cleanExit();
             }
 

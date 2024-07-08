@@ -3,24 +3,26 @@ const Allocator = std.mem.Allocator;
 
 const VERSION = "0.0.21";
 
-fn embedData(b: *std.Build, exe: *std.Build.Step.Compile) !void {
+fn embedConfig(b: *std.Build, exe: *std.Build.Step.Compile, page_paths: std.ArrayList([]const u8)) !void {
     var options = b.addOptions();
-
-    const pages = try collectPages(b, exe, "pages");
-    options.addOption([]const []const u8, "pages", pages.items);
-
+    options.addOption([]const []const u8, "page_paths", page_paths.items);
     options.addOption([]const u8, "version", try getVersion(b.allocator));
+    exe.root_module.addOptions("config", options);
 
-    exe.root_module.addOptions("embedded", options);
+    for (page_paths.items) |page_path| {
+        exe.root_module.addAnonymousImport(page_path, .{
+            .root_source_file = b.path(page_path),
+        });
+    }
 }
 
-fn collectPages(b: *std.Build, exe: *std.Build.Step.Compile, path: []const u8) !std.ArrayList([]const u8) {
-    var pages = std.ArrayList([]const u8).init(b.allocator);
-    try traverseAndCollectPages(b, exe, &pages, path);
-    return pages;
+fn collectPagePaths(b: *std.Build) !std.ArrayList([]const u8) {
+    var page_paths = std.ArrayList([]const u8).init(b.allocator);
+    try traverseAndCollectPagePaths(b, &page_paths, "pages");
+    return page_paths;
 }
 
-fn traverseAndCollectPages(b: *std.Build, exe: *std.Build.Step.Compile, pages: *std.ArrayList([]const u8), path: []const u8) !void {
+fn traverseAndCollectPagePaths(b: *std.Build, pages: *std.ArrayList([]const u8), path: []const u8) !void {
     var dir = try std.fs.cwd().openDir(path, .{ .iterate = true });
     var it = dir.iterate();
 
@@ -33,15 +35,11 @@ fn traverseAndCollectPages(b: *std.Build, exe: *std.Build.Step.Compile, pages: *
                     continue;
                 }
 
-                std.debug.print("Embedding {s}\n", .{name});
+                std.debug.print("Found {s}\n", .{name});
                 try pages.append(name);
-
-                exe.root_module.addAnonymousImport(name, .{
-                    .root_source_file = b.path(name),
-                });
             },
             .directory => {
-                try traverseAndCollectPages(b, exe, pages, name);
+                try traverseAndCollectPagePaths(b, pages, name);
             },
             else => |t| std.debug.panic("Unexpected type '{any}'", .{t}),
         }
@@ -60,6 +58,10 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    const page_paths = collectPagePaths(b) catch |err| {
+        std.debug.panic("{any}", .{err});
+    };
+
     const exe = b.addExecutable(.{
         .name = "drtl",
         .root_source_file = b.path("src/main.zig"),
@@ -67,7 +69,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    embedData(b, exe) catch |err| {
+    embedConfig(b, exe, page_paths) catch |err| {
         std.debug.panic("{any}", .{err});
     };
 
@@ -101,7 +103,7 @@ pub fn build(b: *std.Build) void {
             .strip = true,
         });
 
-        embedData(b, rel_exe) catch |err| {
+        embedConfig(b, rel_exe, page_paths) catch |err| {
             std.debug.panic("{any}", .{err});
         };
 
