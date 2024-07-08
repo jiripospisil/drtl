@@ -5,7 +5,7 @@ const File = std.fs.File;
 const ArenaAllocator = std.heap.ArenaAllocator;
 const Allocator = std.mem.Allocator;
 
-const pages_map = std.ComptimeStringMap([]const u8, load_pages: {
+const pages_map = std.StaticStringMap([]const u8).initComptime(load_pages: {
     const Entry = struct {
         []const u8,
         []const u8,
@@ -128,8 +128,8 @@ fn printPageList(stdout: File) !void {
     var stdout_bw = std.io.bufferedWriter(stdout.writer());
     const stdout_w = stdout_bw.writer();
 
-    for (pages_map.kvs) |kvs| {
-        try stdout_w.print("{s}\n", .{kvs.key});
+    for (pages_map.keys()) |key| {
+        try stdout_w.print("{s}\n", .{key});
     }
 
     try stdout_bw.flush();

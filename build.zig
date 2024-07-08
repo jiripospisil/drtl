@@ -62,7 +62,7 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "drtl",
-        .root_source_file = .{ .path = "src/main.zig" },
+        .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
     });
@@ -91,7 +91,7 @@ pub fn build(b: *std.Build) void {
 
         const rel_exe = b.addExecutable(.{
             .name = "drtl",
-            .root_source_file = .{ .path = "src/main.zig" },
+            .root_source_file = b.path("src/main.zig"),
             .target = b.resolveTargetQuery(query),
             .optimize = .ReleaseSafe,
             .strip = true,
