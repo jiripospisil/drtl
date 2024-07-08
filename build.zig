@@ -75,13 +75,17 @@ pub fn build(b: *std.Build) void {
 
     const release = b.step("release", "create binaries for common targets");
     const release_targets = [_][]const u8{
+        "x86-linux",
+
+        "x86_64-linux",
+        "x86_64-macos",
+        "x86_64-windows",
+
         "aarch64-linux",
         "aarch64-macos",
-        "x86_64-linux",
-        "x86-linux",
-        "x86_64-macos",
         "aarch64-windows",
-        "x86_64-windows",
+
+        "riscv64-linux",
     };
 
     for (release_targets) |target_string| {
