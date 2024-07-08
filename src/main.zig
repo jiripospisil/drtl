@@ -120,7 +120,7 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
     }
 
     const joined = try std.mem.join(allocator, ", ", candidate_pages.items);
-    std.debug.print("Unable to locate the page. The candidates were {s}.", .{joined});
+    std.debug.print("Unable to locate the page. The candidates were {s}.\n", .{joined});
     std.process.exit(1);
 }
 
@@ -136,11 +136,11 @@ fn printPageList(stdout: File) !void {
 }
 
 pub fn main() !void {
-    var arena_instance = ArenaAllocator.init(std.heap.page_allocator);
-    defer arena_instance.deinit();
-    const arena = arena_instance.allocator();
+    var arena = ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
 
-    const args = try std.process.argsAlloc(arena);
+    const args = try std.process.argsAlloc(allocator);
     var idx: usize = 1;
 
     const stdout = std.io.getStdOut();
@@ -172,7 +172,7 @@ pub fn main() !void {
             std.process.exit(1);
         }
 
-        return printPage(arena, stdout, arg);
+        return printPage(allocator, stdout, arg);
     }
 }
 
