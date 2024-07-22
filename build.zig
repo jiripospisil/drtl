@@ -25,6 +25,7 @@ pub fn build(b: *std.Build) !void {
         .name = "compile_pages",
         .root_source_file = b.path("src/compile_pages.zig"),
         .target = b.host,
+        .optimize = optimize,
     });
 
     const tool_step = b.addRunArtifact(tool);
