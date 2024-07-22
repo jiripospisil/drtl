@@ -3,64 +3,33 @@ const Allocator = std.mem.Allocator;
 
 const VERSION = "0.0.21";
 
-fn embedConfig(b: *std.Build, exe: *std.Build.Step.Compile, page_paths: std.ArrayList([]const u8)) !void {
+fn embedConfig(b: *std.Build, exe: *std.Build.Step.Compile) !void {
     var options = b.addOptions();
-    options.addOption([]const []const u8, "page_paths", page_paths.items);
     options.addOption([]const u8, "version", try getVersion(b.allocator));
     exe.root_module.addOptions("config", options);
-
-    for (page_paths.items) |page_path| {
-        exe.root_module.addAnonymousImport(page_path, .{
-            .root_source_file = b.path(page_path),
-        });
-    }
-}
-
-fn collectPagePaths(b: *std.Build) !std.ArrayList([]const u8) {
-    var page_paths = std.ArrayList([]const u8).init(b.allocator);
-    try traverseAndCollectPagePaths(b, &page_paths, "pages");
-    return page_paths;
-}
-
-fn traverseAndCollectPagePaths(b: *std.Build, pages: *std.ArrayList([]const u8), path: []const u8) !void {
-    var dir = try std.fs.cwd().openDir(path, .{ .iterate = true });
-    var it = dir.iterate();
-
-    while (try it.next()) |file| {
-        const name = try std.fmt.allocPrint(b.allocator, "{s}/{s}", .{ path, file.name });
-
-        switch (file.kind) {
-            .file => {
-                if (!std.mem.endsWith(u8, name, ".md")) {
-                    continue;
-                }
-
-                std.debug.print("Found {s}\n", .{name});
-                try pages.append(name);
-            },
-            .directory => {
-                try traverseAndCollectPagePaths(b, pages, name);
-            },
-            else => |t| std.debug.panic("Unexpected type '{any}'", .{t}),
-        }
-    }
 }
 
 fn getVersion(allocator: Allocator) ![]const u8 {
-    var file = try std.fs.cwd().openFile("./pages/updated_on", .{});
+    var file = try std.fs.cwd().openFile("pages/updated_on", .{});
     defer file.close();
 
     const updated_on = try file.readToEndAlloc(allocator, 11);
     return try std.fmt.allocPrint(allocator, "v{s}, database updated on {s}", .{ VERSION, updated_on });
 }
 
-pub fn build(b: *std.Build) void {
+pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const page_paths = collectPagePaths(b) catch |err| {
-        std.debug.panic("{any}", .{err});
-    };
+    const tool = b.addExecutable(.{
+        .name = "compile_pages",
+        .root_source_file = b.path("src/compile_pages.zig"),
+        .target = b.host,
+    });
+
+    const tool_step = b.addRunArtifact(tool);
+    tool_step.addFileInput(b.path("pages/updated_on"));
+    const output = tool_step.addOutputFileArg("pages.zig");
 
     const exe = b.addExecutable(.{
         .name = "drtl",
@@ -68,10 +37,11 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    try embedConfig(b, exe);
 
-    embedConfig(b, exe, page_paths) catch |err| {
-        std.debug.panic("{any}", .{err});
-    };
+    exe.root_module.addAnonymousImport("pages", .{
+        .root_source_file = output,
+    });
 
     b.installArtifact(exe);
 
@@ -102,10 +72,11 @@ pub fn build(b: *std.Build) void {
             .optimize = .ReleaseSafe,
             .strip = true,
         });
+        try embedConfig(b, rel_exe);
 
-        embedConfig(b, rel_exe, page_paths) catch |err| {
-            std.debug.panic("{any}", .{err});
-        };
+        rel_exe.root_module.addAnonymousImport("pages", .{
+            .root_source_file = output,
+        });
 
         const install = b.addInstallArtifact(rel_exe, .{});
         install.dest_dir = .prefix;

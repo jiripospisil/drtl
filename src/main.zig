@@ -1,26 +1,10 @@
 const std = @import("std");
 const builtin = @import("builtin");
 const config = @import("config");
+const pages = @import("pages").pages;
 const File = std.fs.File;
 const ArenaAllocator = std.heap.ArenaAllocator;
 const Allocator = std.mem.Allocator;
-
-const pages_map = std.StaticStringMap([]const u8).initComptime(load_pages: {
-    const Entry = struct {
-        []const u8,
-        []const u8,
-    };
-
-    var array: [config.page_paths.len]Entry = undefined;
-
-    // ought to be enough for anybody
-    @setEvalBranchQuota(200_000);
-    for (config.page_paths, 0..) |name, i| {
-        array[i] = .{ name[6..(name.len - 3)], @embedFile(name) };
-    }
-
-    break :load_pages array[0..];
-});
 
 fn writeHighlighted(allocator: Allocator, stdout: File, content: []const u8) !void {
     const tty_conf = std.io.tty.detectConfig(std.io.getStdErr());
@@ -112,7 +96,7 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
     };
 
     for (candidate_pages.items) |page_name| {
-        const content = pages_map.get(page_name);
+        const content = pages.get(page_name);
 
         if (content) |c| {
             return try writeHighlighted(allocator, stdout, c);
@@ -128,7 +112,7 @@ fn printPageList(stdout: File) !void {
     var stdout_bw = std.io.bufferedWriter(stdout.writer());
     const stdout_w = stdout_bw.writer();
 
-    for (pages_map.keys()) |key| {
+    for (pages.keys()) |key| {
         try stdout_w.print("{s}\n", .{key});
     }
 
