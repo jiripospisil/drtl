@@ -85,6 +85,7 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
             "sunos",
             "windows",
             "freebsd",
+            "netbsd",
             "openbsd",
         };
         for (categories) |category| {
