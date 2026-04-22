@@ -5,16 +5,13 @@ const VERSION = "1.0.0";
 
 fn embedConfig(b: *std.Build, exe: *std.Build.Step.Compile) !void {
     var options = b.addOptions();
-    options.addOption([]const u8, "version", try getVersion(b.allocator));
+    options.addOption([]const u8, "version", try getVersion(b));
     exe.root_module.addOptions("config", options);
 }
 
-fn getVersion(allocator: Allocator) ![]const u8 {
-    var file = try std.fs.cwd().openFile("pages/updated_on", .{});
-    defer file.close();
-
-    const updated_on = try file.readToEndAlloc(allocator, 11);
-    return try std.fmt.allocPrint(allocator, "v{s}, database updated on {s}", .{ VERSION, updated_on });
+fn getVersion(b: *std.Build) ![]const u8 {
+    const updated_on = try std.Io.Dir.cwd().readFileAlloc(b.graph.io, "pages/updated_on", b.allocator, .limited(12));
+    return try std.fmt.allocPrint(b.allocator, "v{s}, database updated on {s}", .{ VERSION, updated_on });
 }
 
 pub fn build(b: *std.Build) !void {
@@ -23,9 +20,11 @@ pub fn build(b: *std.Build) !void {
 
     const tool = b.addExecutable(.{
         .name = "compile_pages",
-        .root_source_file = b.path("src/compile_pages.zig"),
-        .target = b.host,
-        .optimize = optimize,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/compile_pages.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
     });
 
     const tool_step = b.addRunArtifact(tool);
@@ -34,9 +33,11 @@ pub fn build(b: *std.Build) !void {
 
     const exe = b.addExecutable(.{
         .name = "drtl",
-        .root_source_file = b.path("src/main.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/main.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
     });
     try embedConfig(b, exe);
 
@@ -62,16 +63,18 @@ pub fn build(b: *std.Build) !void {
     };
 
     for (release_targets) |target_string| {
-        const query = std.zig.CrossTarget.parse(.{
+        const query = std.Target.Query.parse(.{
             .arch_os_abi = target_string,
         }) catch unreachable;
 
         const rel_exe = b.addExecutable(.{
             .name = "drtl",
-            .root_source_file = b.path("src/main.zig"),
-            .target = b.resolveTargetQuery(query),
-            .optimize = .ReleaseSafe,
-            .strip = true,
+            .root_module = b.createModule(.{
+                .root_source_file = b.path("src/main.zig"),
+                .target = b.resolveTargetQuery(query),
+                .optimize = .ReleaseSafe,
+                .strip = true,
+            }),
         });
         try embedConfig(b, rel_exe);
 

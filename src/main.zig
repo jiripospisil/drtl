@@ -2,69 +2,67 @@ const std = @import("std");
 const builtin = @import("builtin");
 const config = @import("config");
 const pages = @import("pages").pages;
-const File = std.fs.File;
-const ArenaAllocator = std.heap.ArenaAllocator;
 const Allocator = std.mem.Allocator;
 
-fn writeHighlighted(allocator: Allocator, stdout: File, content: []const u8) !void {
-    const tty_conf = std.io.tty.detectConfig(std.io.getStdErr());
-    var stdout_bw = std.io.bufferedWriter(stdout.writer());
-    const stdout_w = stdout_bw.writer();
-
-    try stdout_w.writeAll("\n");
+fn writeHighlighted(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, content: []const u8) !void {
+    const mode: std.Io.Terminal.Mode = try .detect(io, std.Io.File.stdout(), false, false);
+    var terminal: std.Io.Terminal = .{
+        .writer = writer,
+        .mode = mode,
+    };
+    try writer.writeAll("\n");
 
     var it = std.mem.tokenizeScalar(u8, content, '\n');
 
     while (it.next()) |s| {
         if (std.mem.eql(u8, s, "")) {
-            try stdout_w.writeAll("\n");
+            try writer.writeAll("\n");
         } else if (std.mem.startsWith(u8, s, "#")) {
-            try tty_conf.setColor(stdout_w, .bold);
-            try stdout_w.print("{s}\n\n", .{s[2..]});
-            try tty_conf.setColor(stdout_w, .reset);
+            try terminal.setColor(.bold);
+            try writer.print("{s}\n\n", .{s[2..]});
+            try terminal.setColor(.reset);
         } else if (std.mem.startsWith(u8, s, ">")) {
-            try tty_conf.setColor(stdout_w, .dim);
-            try stdout_w.print("{s}\n\n", .{s[2..]});
-            try tty_conf.setColor(stdout_w, .reset);
+            try terminal.setColor(.dim);
+            try writer.print("{s}\n\n", .{s[2..]});
+            try terminal.setColor(.reset);
         } else if (std.mem.startsWith(u8, s, "-")) {
-            try tty_conf.setColor(stdout_w, .green);
-            try stdout_w.print("{s}\n", .{s});
-            try tty_conf.setColor(stdout_w, .reset);
+            try terminal.setColor(.green);
+            try writer.print("{s}\n", .{s});
+            try terminal.setColor(.reset);
         } else if (std.mem.startsWith(u8, s, "`")) {
             const ss = s[1..(s.len - 1)];
             const output = try allocator.alloc(u8, ss.len);
 
             _ = std.mem.replace(u8, ss, "}}", "{{", output);
 
-            try stdout_w.writeAll("    ");
-            try tty_conf.setColor(stdout_w, .red);
+            try writer.writeAll("    ");
+            try terminal.setColor(.red);
 
             var itt = std.mem.tokenizeSequence(u8, output, "{{");
             var flip = false;
             while (itt.next()) |sss| {
                 if (flip) {
-                    try tty_conf.setColor(stdout_w, .blue);
+                    try terminal.setColor(.blue);
                 } else {
-                    try tty_conf.setColor(stdout_w, .red);
+                    try terminal.setColor(.red);
                 }
                 flip = !flip;
-                try stdout_w.writeAll(sss);
+                try writer.writeAll(sss);
             }
-            try stdout_w.writeAll("\n\n");
+            try writer.writeAll("\n\n");
         }
     }
 
-    try tty_conf.setColor(stdout_w, .reset);
-    try stdout_bw.flush();
+    try terminal.setColor(.reset);
 }
 
-fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
+fn printPage(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, name: []const u8) !void {
     const candidate_pages = candidate_pages: {
-        var list = std.ArrayList([]const u8).init(allocator);
+        var list: std.ArrayList([]const u8) = .empty;
 
         // category/name -> [category/name]
         if (std.mem.containsAtLeast(u8, name, 1, "/")) {
-            try list.append(name);
+            try list.append(allocator, name);
             break :candidate_pages list;
         }
 
@@ -75,8 +73,8 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
             .macos => "osx",
             else => "linux",
         };
-        try list.append(try std.fmt.allocPrint(allocator, "{s}/{s}", .{ current_os, name }));
-        try list.append(try std.fmt.allocPrint(allocator, "common/{s}", .{name}));
+        try list.append(allocator, try std.fmt.allocPrint(allocator, "{s}/{s}", .{ current_os, name }));
+        try list.append(allocator, try std.fmt.allocPrint(allocator, "common/{s}", .{name}));
 
         const categories = [_][]const u8{
             "android",
@@ -90,7 +88,7 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
         };
         for (categories) |category| {
             if (!std.mem.eql(u8, current_os, category)) {
-                try list.append(try std.fmt.allocPrint(allocator, "{s}/{s}", .{ category, name }));
+                try list.append(allocator, try std.fmt.allocPrint(allocator, "{s}/{s}", .{ category, name }));
             }
         }
         break :candidate_pages list;
@@ -100,7 +98,7 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
         const content = pages.get(page_name);
 
         if (content) |c| {
-            return try writeHighlighted(allocator, stdout, c);
+            return try writeHighlighted(io, allocator, writer, c);
         }
     }
 
@@ -109,55 +107,54 @@ fn printPage(allocator: Allocator, stdout: File, name: []const u8) !void {
     std.process.exit(1);
 }
 
-fn printPageList(stdout: File) !void {
-    var stdout_bw = std.io.bufferedWriter(stdout.writer());
-    const stdout_w = stdout_bw.writer();
+fn printPageList(io: std.Io, stdout: std.Io.File) !void {
+    var buffer: [4096]u8 = undefined;
+    var writer = stdout.writer(io, &buffer);
 
     for (pages.keys()) |key| {
-        try stdout_w.print("{s}\n", .{key});
+        try writer.interface.print("{s}\n", .{key});
     }
 
-    try stdout_bw.flush();
+    try writer.flush();
 }
 
-pub fn main() !void {
-    var arena = ArenaAllocator.init(std.heap.page_allocator);
-    defer arena.deinit();
-    const allocator = arena.allocator();
+pub fn main(init: std.process.Init) !void {
+    const args = try init.minimal.args.toSlice(init.arena.allocator());
+    const stdout = std.Io.File.stdout();
 
-    const args = try std.process.argsAlloc(allocator);
-    var idx: usize = 1;
-
-    const stdout = std.io.getStdOut();
+    var buffer: [4096]u8 = undefined;
+    var w = stdout.writer(init.io, &buffer);
+    var writer = &w.interface;
+    defer writer.flush() catch {};
 
     if (args.len == 1) {
-        try stdout.writeAll(usage_text);
-        return std.process.cleanExit();
+        try writer.writeAll(usage_text);
+        return std.process.cleanExit(init.io);
     }
 
-    while (idx < args.len) : (idx += 1) {
+    for (1..args.len) |idx| {
         const arg = args[idx];
 
         if (std.mem.startsWith(u8, arg, "-")) {
             if (std.mem.eql(u8, arg, "-h") or std.mem.eql(u8, arg, "--help")) {
-                try stdout.writeAll(usage_text);
-                return std.process.cleanExit();
+                try writer.writeAll(usage_text);
+                return std.process.cleanExit(init.io);
             }
 
             if (std.mem.eql(u8, arg, "-v") or std.mem.eql(u8, arg, "--version")) {
-                try stdout.writeAll(config.version);
-                return std.process.cleanExit();
+                try writer.writeAll(config.version);
+                return std.process.cleanExit(init.io);
             }
 
             if (std.mem.eql(u8, arg, "-l") or std.mem.eql(u8, arg, "--list")) {
-                return printPageList(stdout);
+                return printPageList(init.io, stdout);
             }
 
             std.debug.print("Unknown option: '{s}'\n\n{s}", .{ arg, usage_text });
             std.process.exit(1);
         }
 
-        return printPage(allocator, stdout, arg);
+        try printPage(init.io, init.arena.allocator(), writer, arg);
     }
 }
 
