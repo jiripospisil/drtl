@@ -4,13 +4,12 @@ const config = @import("config");
 const pages = @import("pages").pages;
 const Allocator = std.mem.Allocator;
 
-fn writeHighlighted(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, content: []const u8) !void {
+fn writeHighlighted(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, page_name: []const u8, content: []const u8) !void {
     const mode: std.Io.Terminal.Mode = try .detect(io, std.Io.File.stdout(), false, false);
     var terminal: std.Io.Terminal = .{
         .writer = writer,
         .mode = mode,
     };
-    try writer.writeAll("\n");
 
     var it = std.mem.tokenizeScalar(u8, content, '\n');
 
@@ -19,10 +18,9 @@ fn writeHighlighted(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, co
             try writer.writeAll("\n");
         } else if (std.mem.startsWith(u8, s, "#")) {
             try terminal.setColor(.bold);
-            try writer.print("{s}\n\n", .{s[2..]});
+            try writer.print("{s} ({s})\n\n", .{ s[2..], page_name });
             try terminal.setColor(.reset);
         } else if (std.mem.startsWith(u8, s, ">")) {
-            try terminal.setColor(.dim);
             try writer.print("{s}\n\n", .{s[2..]});
             try terminal.setColor(.reset);
         } else if (std.mem.startsWith(u8, s, "-")) {
@@ -49,7 +47,7 @@ fn writeHighlighted(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, co
                 flip = !flip;
                 try writer.writeAll(sss);
             }
-            try writer.writeAll("\n\n");
+            try writer.writeAll("\n");
         }
     }
 
@@ -78,13 +76,16 @@ fn printPage(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, name: []c
 
         const categories = [_][]const u8{
             "android",
+            "cisco-ios",
+            "common",
+            "dos",
+            "freebsd",
             "linux",
+            "netbsd",
+            "openbsd",
             "osx",
             "sunos",
             "windows",
-            "freebsd",
-            "netbsd",
-            "openbsd",
         };
         for (categories) |category| {
             if (!std.mem.eql(u8, current_os, category)) {
@@ -98,7 +99,7 @@ fn printPage(io: std.Io, allocator: Allocator, writer: *std.Io.Writer, name: []c
         const content = pages.get(page_name);
 
         if (content) |c| {
-            return try writeHighlighted(io, allocator, writer, c);
+            return try writeHighlighted(io, allocator, writer, page_name, c);
         }
     }
 
