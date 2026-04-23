@@ -2,7 +2,7 @@
 
 set -eu
 
-wget https://github.com/tldr-pages/tldr/archive/main.zip
+wcurl https://github.com/tldr-pages/tldr/archive/main.zip
 
 rm -rf pages
 unzip main.zip "tldr-main/pages/*.md"
