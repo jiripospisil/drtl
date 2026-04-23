@@ -1,20 +1,33 @@
 # at
 
-> Executes commands at a specified time.
-> More information: <https://man.archlinux.org/man/at.1>.
+> Execute commands once at a later time.
+> Results will be sent to the users mail.
+> More information: <https://manned.org/at>.
 
-- Open an `at` prompt to create a new set of scheduled commands, press `Ctrl + D` to save and exit:
+- Start the `atd` daemon:
+
+`systemctl start atd`
+
+- Create commands interactively and execute them in 5 minutes (press `<Ctrl d>` when done):
+
+`at now + 5 minutes`
+
+- Create commands interactively and execute them at a specific time:
 
 `at {{hh:mm}}`
 
-- Execute the commands and email the result using a local mailing program such as Sendmail:
+- Execute a command from `stdin` at 10:00 AM today:
 
-`at {{hh:mm}} -m`
+`echo "{{command}}" | at 1000`
 
-- Execute a script at the given time:
+- Execute commands from a given file next Tuesday:
 
-`at {{hh:mm}} -f {{path/to/file}}`
+`at -f {{path/to/file}} 9:30 PM Tue`
 
-- Display a system notification at 11pm on February 18th:
+- List all queued jobs for the current user (same as `atq`):
 
-`echo "notify-send '{{Wake up!}}'" | at {{11pm}} {{Feb 18}}`
+`at -l`
+
+- View a specied job:
+
+`at -c {{job_number}}`

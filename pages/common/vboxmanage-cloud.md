@@ -1,15 +1,15 @@
-# vboxmanage-cloud
+# VBoxManage cloud
 
 > VirtualBox command-line interface for managing cloud instances and images.
 > More information: <https://www.virtualbox.org/manual/ch08.html#vboxmanage-cloud>.
 
 - List the instances in the specified state belonging to the specified compartment:
 
-`VBoxManage cloud --provider={{provider_name}} --profile={{profile_name}} list instances --state={{running|terminated|paused}} --compartment-id={{compartment_id}`
+`VBoxManage cloud --provider={{provider_name}} --profile={{profile_name}} list instances --state={{running|terminated|paused}} --compartment-id={{compartment_id}}`
 
 - Create a new instance:
 
-`VBoxManage cloud --provider={{provider_name}} --profile={{profile_name}} instance create --domain-name={{domain_name}} --image-id={{image_id}} | {{--options...}}`
+`VBoxManage cloud --provider={{provider_name}} --profile={{profile_name}} instance create --domain-name={{domain_name}} --image-id={{image_id}}`
 
 - Gather information about a particular instance:
 

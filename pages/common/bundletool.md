@@ -1,7 +1,7 @@
 # bundletool
 
 > Manipulate Android Application Bundles.
-> Some subcommands such as `bundletool validate` have their own usage documentation.
+> Some subcommands such as `validate` have their own usage documentation.
 > More information: <https://developer.android.com/tools/bundletool>.
 
 - Display help for a subcommand:
@@ -14,7 +14,7 @@
 
 - Generate APKs from an application bundle giving the keystore password:
 
-`bundletool build-apks --bundle {{path/to/bundle.aab}} --ks {{path/to/key.keystore}} --ks-key-alias {{key_alias}} –ks-pass {{pass:the_password}} --output {{path/to/file.apks}}`
+`bundletool build-apks --bundle {{path/to/bundle.aab}} --ks {{path/to/key.keystore}} --ks-key-alias {{key_alias}} --ks-pass {{pass:the_password}} --output {{path/to/file.apks}}`
 
 - Generate APKs including only one single APK for universal usage:
 

@@ -1,13 +1,14 @@
 # host
 
 > Lookup Domain Name Server.
+> See also: `dig`, `resolvectl`, `nslookup`.
 > More information: <https://manned.org/host>.
 
 - Lookup A, AAAA, and MX records of a domain:
 
 `host {{domain}}`
 
-- Lookup a field (CNAME, TXT,...) of a domain:
+- Lookup a field (CNAME, TXT, ...) of a domain:
 
 `host -t {{field}} {{domain}}`
 

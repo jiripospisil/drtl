@@ -1,13 +1,13 @@
 # quickget
 
 > Download and prepare materials for building a Quickemu virtual machine.
-> Note: the parameter "edition" is always optional.
+> Note: The parameter "edition" is sometimes optional.
 > See also: `quickemu`.
 > More information: <https://github.com/quickemu-project/quickemu>.
 
-- Display the list of all supported guest operating systems, versions and variants:
+- Display the list of all supported guest operating systems, versions, and variants in various formats:
 
-`quickget list`
+`quickget {{--list|--list-csv|--list-json}}`
 
 - Download and create the virtual machine configuration for building a Quickemu virtual machine for an OS:
 
@@ -19,16 +19,20 @@
 
 - Download a macOS recovery image and creates a virtual machine configuration:
 
-`quickget macos {{high-sierra|mojave|catalina|big-sur|monterey|ventura}}`
+`quickget macos {{mojave|catalina|big-sur|monterey|ventura|sonoma}}`
 
-- Show an ISO URL for an operating system (Note: it does not work for Windows):
+- Show an ISO URL for an operating system:
 
-`quickget --show-iso-url fedora {{release}} {{edition}}`
+`quickget --url {{os}} {{release}} {{edition}}`
 
 - Test if an ISO file is available for an operating system:
 
-`quickget --test-iso-url nixos {{edition}} {{plasma5}}`
+`quickget --check {{os}} {{release}} {{edition}}`
 
-- Open an operating system distribution's homepage in a browser (Note: it does not work for Windows):
+- Download an image without building any VM configuration:
 
-`quickget --open-distro-homepage {{os}}`
+`quickget --download {{os}} {{release}} {{edition}}`
+
+- Create a VM configuration for an OS image (this will move the ISO from the source directory):
+
+`quickget --create-config {{os}} {{path/to/iso}}`

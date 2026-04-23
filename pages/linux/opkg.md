@@ -17,7 +17,7 @@
 
 - Upgrade one or more specific package(s):
 
-`opkg upgrade {{package(s)}}`
+`opkg upgrade {{package1 package2 ...}}`
 
 - Display information for a specific package:
 
@@ -26,3 +26,11 @@
 - List all the available packages:
 
 `opkg list`
+
+- Find out which package owns a file:
+
+`opkg search /{{path/to/file}}`
+
+- List all files belonging to a package:
+
+`opkg files {{package}}`

@@ -1,7 +1,7 @@
 # gedit
 
 > Text editor of the GNOME Desktop project.
-> More information: <https://help.gnome.org/users/gedit/stable/>.
+> More information: <https://manned.org/gedit>.
 
 - Open a text file:
 
@@ -13,7 +13,7 @@
 
 - Open a text file with a specific encoding:
 
-`gedit --encoding={{UTF-8}} {{path/to/file}}`
+`gedit --encoding {{UTF-8}} {{path/to/file}}`
 
 - Display a list of supported encodings:
 

@@ -8,13 +8,13 @@
 
 `ssh {{username}}@{{remote_host}}`
 
-- Connect to a remote server with a specific identity (private key):
+- Connect to a remote server with a specific [i]dentity (private key):
 
 `ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}`
 
-- Connect to a remote server using a specific [p]ort:
+- Connect to a remote server with IP `10.0.0.1` and using a specific [p]ort (Note: `10.0.0.1` can be shortened to `10.1`):
 
-`ssh {{username}}@{{remote_host}} -p {{2222}}`
+`ssh {{username}}@10.0.0.1 -p {{2222}}`
 
 - Run a command on a remote server with a [t]ty allocation allowing interaction with the remote command:
 
@@ -32,6 +32,6 @@
 
 `ssh -J {{username}}@{{jump_host}} {{username}}@{{remote_host}}`
 
-- Agent forwarding: Forward the authentication information to the remote machine (see `man ssh_config` for available options):
+- Close a hanged session:
 
-`ssh -A {{username}}@{{remote_host}}`
+`<Enter><~><.>`

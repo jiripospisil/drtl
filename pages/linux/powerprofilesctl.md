@@ -1,11 +1,11 @@
 # powerprofilesctl
 
 > Make power profiles handling available over D-Bus.
-> More information: <https://gitlab.freedesktop.org/hadess/power-profiles-daemon/>.
+> More information: <https://gitlab.freedesktop.org/upower/power-profiles-daemon#how-to-use>.
 
 - List available power profiles:
 
-`powerprofilesctl list`
+`powerprofilesctl`
 
 - Set a specific power profile:
 

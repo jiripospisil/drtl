@@ -1,7 +1,7 @@
 # railway
 
 > Connect code to a Railway project.
-> More information: <https://railway.app/>.
+> More information: <https://docs.railway.com/reference/cli-api>.
 
 - Login to a Railway account:
 
@@ -9,7 +9,7 @@
 
 - Link to an existing Project under a Railway account or team:
 
-`railway link {{projectId}}`
+`railway link {{project_id}}`
 
 - Create a new project:
 

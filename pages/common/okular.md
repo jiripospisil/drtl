@@ -1,7 +1,7 @@
 # okular
 
 > View documents.
-> More information: <https://docs.kde.org/stable5/en/okular/okular/command-line-options.html>.
+> More information: <https://docs.kde.org/stable_kf6/en/okular/okular/command-line-options.html>.
 
 - Launch document viewer:
 
@@ -13,7 +13,7 @@
 
 - Open a document at a specific page:
 
-`okular --page {{page_number}} {{path/to/file}}`
+`okular {{[-p|--page]}} {{page_number}} {{path/to/file}}`
 
 - Open a specific document in presentation mode:
 

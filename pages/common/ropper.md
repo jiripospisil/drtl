@@ -1,13 +1,13 @@
 # ropper
 
 > Find ROP gadgets in binary files.
-> More information: <http://scoding.de/ropper/>.
+> More information: <https://scoding.de/ropper/>.
 
 - List gadgets in the binary file:
 
 `ropper --file {{path/to/binary}}`
 
-- Filter gadgets in the binary file by a regular expression:
+- Filter gadgets in the binary file by a `regex`:
 
 `ropper --file {{path/to/binary}} --search {{regex}}`
 

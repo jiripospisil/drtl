@@ -1,7 +1,7 @@
 # terraform
 
 > Create and deploy infrastructure as code to cloud providers.
-> More information: <https://www.terraform.io/>.
+> More information: <https://developer.hashicorp.com/terraform/cli/commands>.
 
 - Initialize a new or existing Terraform configuration:
 
@@ -23,6 +23,6 @@
 
 `terraform apply`
 
-- Destroy Terraform-managed infrastructure:
+- Destroy all infrastructure in the current directory:
 
 `terraform destroy`

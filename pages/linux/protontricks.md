@@ -1,7 +1,7 @@
 # protontricks
 
 > A simple wrapper that runs Winetricks commands for Proton enabled games.
-> More information: <https://github.com/Matoking/protontricks>.
+> More information: <https://github.com/Matoking/protontricks#usage>.
 
 - Run the protontricks GUI:
 
@@ -13,16 +13,20 @@
 
 - Run a command within a game's installation directory:
 
-`protontricks -c {{command}} {{appid}}`
+`protontricks {{[-c|--command]}} {{command}} {{appid}}`
 
-- [l]ist all installed games:
+- List all installed games:
 
-`protontricks -l`
+`protontricks {{[-l|--list]}}`
 
-- [s]earch for a game's App ID by name:
+- Search for a game's App ID by name:
 
-`protontricks -s {{game_name}}`
+`protontricks {{[-s|--search]}} {{game_name}}`
+
+- Run an executable in the proton environment of a specific game:
+
+`protontricks-launch --appid {{appid}} {{path/to/executable.exe}}`
 
 - Display help:
 
-`protontricks --help`
+`protontricks {{[-h|--help]}}`

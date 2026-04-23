@@ -1,8 +1,9 @@
 # drupal
 
 > Generate boilerplate code, interact with and debug Drupal projects.
-> Some subcommands such as `drupal check` have their own usage documentation.
-> More information: <https://drupalconsole.com/>.
+> Some subcommands such as `check` have their own usage documentation.
+> `drupal` has been deprecated. Use `drush` instead.
+> More information: <https://drupalize.me/topic/drupal-console>.
 
 - Install a module:
 

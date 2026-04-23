@@ -1,7 +1,7 @@
 # mv
 
 > Move or rename files and directories.
-> More information: <https://www.gnu.org/software/coreutils/mv>.
+> More information: <https://www.gnu.org/software/coreutils/manual/html_node/mv-invocation.html>.
 
 - Rename a file or directory when the target is not an existing directory:
 
@@ -17,16 +17,20 @@
 
 - Do not prompt for confirmation before overwriting existing files:
 
-`mv -f {{path/to/source}} {{path/to/target}}`
+`mv {{[-f|--force]}} {{path/to/source}} {{path/to/target}}`
 
-- Prompt for confirmation before overwriting existing files, regardless of file permissions:
+- Prompt for confirmation interactively before overwriting existing files, regardless of file permissions:
 
-`mv -i {{path/to/source}} {{path/to/target}}`
+`mv {{[-i|--interactive]}} {{path/to/source}} {{path/to/target}}`
 
 - Do not overwrite existing files at the target:
 
-`mv -n {{path/to/source}} {{path/to/target}}`
+`mv {{[-n|--no-clobber]}} {{path/to/source}} {{path/to/target}}`
 
 - Move files in verbose mode, showing files after they are moved:
 
-`mv -v {{path/to/source}} {{path/to/target}}`
+`mv {{[-v|--verbose]}} {{path/to/source}} {{path/to/target}}`
+
+- Specify target directory so that you can use external tools to gather movable files:
+
+`{{find /var/log -type f -name '*.log' -print0}} | {{xargs -0}} mv {{[-t|--target-directory]}} {{path/to/target_directory}}`

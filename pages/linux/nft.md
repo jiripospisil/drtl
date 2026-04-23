@@ -1,6 +1,6 @@
 # nft
 
-> Allows configuration of tables, chains and rules provided by the Linux kernel firewall.
+> Allows configuration of tables, chains, and rules provided by the Linux kernel firewall.
 > Nftables replaces iptables.
 > More information: <https://wiki.nftables.org/wiki-nftables/index.php/Main_Page>.
 
@@ -14,7 +14,7 @@
 
 - Add a new chain to accept all inbound traffic:
 
-`sudo nft add chain {{inet}} {{filter}} {{input}} \{ type {{filter}} hook {{input}} priority {{0}} \; policy {{accept}} \}`
+`sudo nft add chain {{inet}} {{filter}} {{input}} \{ type {{filter}} hook {{input}} priority {{0}} \; policy {{accept}} \; \}`
 
 - Add a new rule to accept several TCP ports:
 

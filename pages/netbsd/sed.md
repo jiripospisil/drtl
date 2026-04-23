@@ -4,7 +4,7 @@
 > See also: `awk`, `ed`.
 > More information: <https://man.netbsd.org/sed.1>.
 
-- Replace all `apple` (basic regex) occurrences with `mango` (basic regex) in all input lines and print the result to `stdout`:
+- Replace all `apple` (basic `regex`) occurrences with `mango` (basic `regex`) in all input lines and print the result to `stdout`:
 
 `{{command}} | sed 's/apple/mango/g'`
 
@@ -16,11 +16,11 @@
 
 `{{command}} | sed -fa {{path/to/script.sed}}`
 
-- Turn on GNU re[g]ex extension:
+- Turn on [g]NU `regex` extension:
 
 `{{command}} | sed -fg {{path/to/script.sed}}`
 
-- Replace all `apple` (extended regex) occurrences with `APPLE` (extended regex) in all input lines and print the result to `stdout`:
+- Replace all `apple` (extended `regex`) occurrences with `APPLE` (extended `regex`) in all input lines and print the result to `stdout`:
 
 `{{command}} | sed -E 's/(apple)/\U\1/g'`
 
@@ -28,6 +28,6 @@
 
 `{{command}} | sed -n '1p'`
 
-- Replace all `apple` (basic regex) occurrences with `mango` (basic regex) in a specific file and overwrite the original file in place:
+- Replace all `apple` (basic `regex`) occurrences with `mango` (basic `regex`) in a specific file and overwrite the original file in place:
 
 `sed -i 's/apple/mango/g' {{path/to/file}}`

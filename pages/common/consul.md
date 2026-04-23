@@ -1,8 +1,8 @@
 # consul
 
 > Distributed key-value store with health checking and service discovery.
-> Some subcommands such as `consul kv` have their own usage documentation.
-> More information: <https://www.consul.io/commands>.
+> Some subcommands such as `kv` have their own usage documentation.
+> More information: <https://developer.hashicorp.com/consul/commands>.
 
 - Display help:
 

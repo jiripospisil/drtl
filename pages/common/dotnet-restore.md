@@ -13,7 +13,7 @@
 
 - Restore dependencies without caching the HTTP requests:
 
-`dotnet restore --no-cache`
+`dotnet restore --no-http-cache`
 
 - Force all dependencies to be resolved even if the last restore was successful:
 
@@ -25,4 +25,4 @@
 
 - Restore dependencies with a specific verbosity level:
 
-`dotnet restore --verbosity {{quiet|minimal|normal|detailed|diagnostic}}`
+`dotnet restore {{[-v|--verbosity]}} {{quiet|minimal|normal|detailed|diagnostic}}`

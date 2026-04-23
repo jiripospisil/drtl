@@ -1,36 +1,37 @@
 # loadkeys
 
 > Load the kernel keymap for the console.
+> See also: `localectl`.
 > More information: <https://manned.org/loadkeys>.
+
+- Load a specific keyboard layout for the current console:
+
+`sudo loadkeys {{en|de|fi|dvorak|defkeymap|...}}`
 
 - Load a default keymap:
 
-`loadkeys --default`
+`sudo loadkeys {{[-d|--default]}}`
 
-- Load default keymap when an unusual keymap is loaded and `-` sign cannot be found:
+- Print the kernel source table of a keymap to `stdout`:
 
-`loadkeys defmap`
+`loadkeys {{[-m|--mktable]}} {{en|de|fi|...}}`
 
-- Create a kernel source table:
+- Print the binary format of a keymap to `stdout`:
 
-`loadkeys --mktable`
-
-- Create a binary keymap:
-
-`loadkeys --bkeymap`
+`loadkeys {{[-b|--bkeymap]}} {{en|de|fi|...}}`
 
 - Search and parse keymap without action:
 
-`loadkeys --parse`
+`loadkeys {{[-p|--parse]}} {{en|de|fi|...}}`
 
-- Load the keymap suppressing all output:
+- Load a keymap from `stdin`, suppressing all output:
 
-`loadkeys --quiet`
+`{{command}} | sudo loadkeys {{[-q|--quiet]}}`
+
+- Set a keymap for a specific console:
+
+`sudo loadkeys {{[-C|--console]}} {{/dev/ttyN}} {{uk}}`
 
 - Load a keymap from the specified file for the console:
 
-`loadkeys --console {{/dev/ttyN}} {{/path/to/file}}`
-
-- Use standard names for keymaps of different locales:
-
-`loadkeys --console {{/dev/ttyN}} {{uk}}`
+`sudo loadkeys {{[-C|--console]}} {{/dev/ttyN}} /{{path/to/file}}`

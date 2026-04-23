@@ -1,29 +1,29 @@
 # pacman --files
 
-> Arch Linux package manager utility.
+> Query the local files database.
 > See also: `pacman`, `pkgfile`.
-> More information: <https://man.archlinux.org/man/pacman.8>.
+> More information: <https://manned.org/pacman.8>.
 
 - Update the package database:
 
-`sudo pacman --files --refresh`
+`sudo pacman -Fy`
 
-- Find the package that owns a specific file:
+- Find the package that owns a specific [F]ile:
 
-`pacman --files {{filename}}`
+`pacman -F {{filename}}`
 
-- Find the package that owns a specific file, using a regular expression:
+- Find the package that owns a specific [F]ile, using a `rege[x]`:
 
-`pacman --files --regex '{{regular_expression}}'`
+`pacman -Fx '{{regex}}'`
 
 - List only the package names:
 
-`pacman --files --quiet {{filename}}`
+`pacman -Fq {{filename}}`
 
-- List the files owned by a specific package:
+- [l]ist the [F]iles owned by a specific package:
 
-`pacman --files --list {{package}}`
+`pacman -Fl {{package}}`
 
-- Display help:
+- Display [h]elp:
 
-`pacman --files --help`
+`pacman -Fh`

@@ -1,36 +1,37 @@
 # ollama
 
 > A large language model runner.
-> More information: <https://github.com/ollama/ollama>.
+> For a list of available models, see <https://ollama.com/library>.
+> More information: <https://docs.ollama.com/cli>.
 
 - Start the daemon required to run other commands:
 
 `ollama serve`
 
-- Run a model and chat with it:
+- Run a model and chat with it (will automatically download the model if it's not downloaded):
 
 `ollama run {{model}}`
 
-- Run a model with a single prompt:
+- Run a model with a single prompt and thinking turned off:
 
-`ollama run {{model}} {{prompt}}`
+`ollama run {{model}} --think=false "{{prompt}}"`
 
 - List downloaded models:
 
-`ollama list`
+`ollama {{[ls|list]}}`
 
-- Pull/Update a specific model:
+- Pull a specific model:
 
 `ollama pull {{model}}`
 
-- Upgrade Ollama on Linux:
+- List running models:
 
-`curl -fsSL https://ollama.com/install.sh | sh`
+`ollama ps`
 
 - Delete a model:
 
 `ollama rm {{model}}`
 
-- Create a model from a `Modelfile` ([f]):
+- Create a model from a `Modelfile`:
 
-`ollama create {{new_model_name}} -f {{path/to/Modelfile}}`
+`ollama create {{new_model_name}} {{[-f|--file]}} {{path/to/Modelfile}}`

@@ -1,7 +1,8 @@
 # ivpn
 
-> Command-line interface for the IVPN client.
-> More information: <https://www.ivpn.net>.
+> Interface for the IVPN client.
+> See also: `fastd`, `mozillavpn`, `mullvad`, `warp-cli`.
+> More information: <https://www.ivpn.net/knowledgebase/general/command-line-client-faq/>.
 
 - Print the current state of IVPN, including the connection and firewall status:
 

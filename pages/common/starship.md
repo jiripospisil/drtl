@@ -1,12 +1,12 @@
 # starship
 
 > The minimal, blazing-fast, and infinitely customizable prompt for any shell.
-> Some subcommands such as `starship init` have their own usage documentation.
-> More information: <https://starship.rs>.
+> Some subcommands such as `init` have their own usage documentation.
+> More information: <https://starship.rs/>.
 
 - Print the starship integration code for the specified shell:
 
-`starship init {{bash|elvish|fish|ion|powershell|tcsh|zsh}}`
+`starship init {{bash|elvish|fish|ion|powershell|tcsh|zsh|nu|xonsh|cmd}}`
 
 - Explain each part of the current prompt and show the time taken to render them:
 
@@ -22,7 +22,7 @@
 
 - Edit the starship configuration in the default editor:
 
-`starship configure`
+`starship config`
 
 - Create a bug report GitHub issue pre-populated with information about the system and starship configuration:
 

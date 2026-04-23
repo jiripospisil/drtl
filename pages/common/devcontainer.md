@@ -1,7 +1,7 @@
 # devcontainer
 
 > Use a Docker container as a development environment.
-> More information: <https://containers.dev/>.
+> More information: <https://containers.dev/implementors/reference/>.
 
 - Create and run a Dev Container:
 
@@ -9,7 +9,7 @@
 
 - Apply a Dev Container Template to a workspace:
 
-`devcontainer templates apply --template-id {{template_id}} --template-args {{template_args}} --workspace-folder {{path/to/workspace}}`
+`devcontainer templates apply {{[-t|--template-id]}} {{template_id}} {{[-a|--template-args]}} {{template_args}} {{[-w|--workspace-folder]}} {{path/to/workspace}}`
 
 - Execute a command on a running Dev Container in the current workspace:
 
@@ -18,10 +18,6 @@
 - Build a Dev Container image from `devcontainer.json`:
 
 `devcontainer build {{path/to/workspace}}`
-
-- Open a Dev Container in VS Code (the path is optional):
-
-`devcontainer open {{path/to/workspace}}`
 
 - Read and print the configuration of a Dev Container from `devcontainer.json`:
 

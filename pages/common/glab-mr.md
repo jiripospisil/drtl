@@ -1,8 +1,8 @@
 # glab mr
 
 > Manage GitLab merge requests.
-> Some subcommands such as `glab mr create` have their own usage documentation.
-> More information: <https://glab.readthedocs.io/en/latest/mr>.
+> Some subcommands such as `create` have their own usage documentation.
+> More information: <https://gitlab.com/gitlab-org/cli/-/blob/main/docs/source/mr/_index.md>.
 
 - Create a merge request:
 
@@ -10,7 +10,7 @@
 
 - Check out a specific merge request locally:
 
-`glab mr checkout {{mr_number}}`
+`glab {{[co|mr checkout]}} {{mr_number}}`
 
 - View the changes made in the merge request:
 

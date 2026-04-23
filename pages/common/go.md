@@ -1,12 +1,12 @@
 # go
 
 > Manage Go source code.
-> Some subcommands such as `go build` have their own usage documentation.
-> More information: <https://golang.org>.
+> Some subcommands such as `build` have their own usage documentation.
+> More information: <https://pkg.go.dev/cmd/go>.
 
 - Download and install a package, specified by its import path:
 
-`go get {{package_path}}`
+`go get {{path/to/package}}`
 
 - Compile and run a source file (it has to contain a `main` package):
 

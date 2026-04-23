@@ -2,7 +2,7 @@
 
 > Get SELinux boolean value.
 > See also: `semanage-boolean`, `setsebool`.
-> More information: <https://manned.org/man/getsebool>.
+> More information: <https://manned.org/getsebool>.
 
 - Show the current setting of a boolean:
 
@@ -14,4 +14,4 @@
 
 - Show the current setting of all booleans with explanations:
 
-`sudo semanage boolean {{-l|--list}}`
+`sudo semanage boolean {{[-l|--list]}}`

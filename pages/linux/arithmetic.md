@@ -1,7 +1,7 @@
 # arithmetic
 
 > Quiz on simple arithmetic problems.
-> More information: <https://manpages.debian.org/latest/bsdgames/arithmetic.6.en.html>.
+> More information: <https://manned.org/arithmetic>.
 
 - Start an arithmetic quiz:
 
@@ -11,6 +11,6 @@
 
 `arithmetic -o {{+|-|x|/}}`
 
-- Specify a range. Addition and multiplication problems would feature numbers between 0 and range, inclusive. Subtraction and division problems would have required result and number to be operated on, between 0 and range:
+- Specify a [r]ange. Addition and multiplication problems would feature numbers between 0 and range, inclusive. Subtraction and division problems would have required result and number to be operated on, between 0 and range:
 
 `arithmetic -r {{7}}`

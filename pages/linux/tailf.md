@@ -1,7 +1,7 @@
 # tailf
 
-> This command is superseded by `tail -f`.
-> More information: <https://manned.org/tailf.1>.
+> This command has been superseded by `tail -f`.
+> More information: <https://manned.org/tailf>.
 
 - View documentation for the recommended replacement:
 

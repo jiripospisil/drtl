@@ -1,7 +1,7 @@
 # konsole
 
 > KDE's terminal emulator.
-> More information: <https://docs.kde.org/stable5/en/konsole/konsole/command-line-options.html>.
+> More information: <https://docs.kde.org/stable_kf6/en/konsole/konsole/command-line-options.html>.
 
 - Open the terminal in a specific directory:
 
@@ -15,6 +15,6 @@
 
 `konsole --new-tab`
 
-- Open the terminal in the background and bring to the front when `Ctrl+Shift+F12` is pressed:
+- Open the terminal in the background and bring to the front when `<Ctrl Shift F12>` is pressed:
 
 `konsole --background-mode`

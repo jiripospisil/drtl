@@ -9,11 +9,15 @@
 
 - Edit the merge message:
 
-`git merge --edit {{branch_name}}`
+`git merge {{[-e|--edit]}} {{branch_name}}`
 
 - Merge a branch and create a merge commit:
 
 `git merge --no-ff {{branch_name}}`
+
+- Copy the state of a branch into the working tree and stage it (Note: Use `git commit` to create the actual commit):
+
+`git merge --squash {{branch_name}}`
 
 - Abort a merge in case of conflicts:
 
@@ -21,4 +25,4 @@
 
 - Merge using a specific strategy:
 
-`git merge --strategy {{strategy}} --strategy-option {{strategy_option}} {{branch_name}}`
+`git merge {{[-s|--strategy]}} {{strategy}} {{[-X|--strategy-option]}} {{strategy_option}} {{branch_name}}`

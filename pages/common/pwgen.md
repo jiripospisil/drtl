@@ -1,16 +1,28 @@
 # pwgen
 
 > Generate pronounceable passwords.
-> More information: <https://github.com/tytso/pwgen>.
+> More information: <https://manned.org/pwgen>.
 
-- Generate random password with s[y]mbols:
+- Generate 160 random passwords with character length of 8:
 
-`pwgen -y {{length}}`
+`pwgen`
+
+- Generate passwords with character length of 20:
+
+`pwgen 20`
+
+- Generate 10 passwords with character length of 20:
+
+`pwgen 20 10`
+
+- Generate random passwords with symbols:
+
+`pwgen {{[-y|--symbols]}}`
 
 - Generate secure, hard-to-memorize passwords:
 
-`pwgen -s {{length}}`
+`pwgen {{[-s|--secure]}}`
 
-- Generate password with at least one capital letter in them:
+- Generate password with at least one capital letter in them, specify their length, and how many to generate:
 
-`pwgen -c {{length}}`
+`pwgen {{[-c|--capitalize]}} {{length}} {{count}}`

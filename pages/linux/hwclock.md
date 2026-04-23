@@ -1,16 +1,16 @@
 # hwclock
 
-> Read or change the hardware clock. Usually requires root.
+> Read or change the hardware clock.
 > More information: <https://manned.org/hwclock>.
 
 - Display the current time as reported by the hardware clock:
 
-`hwclock`
+`sudo hwclock`
 
 - Write the current software clock time to the hardware clock (sometimes used during system setup):
 
-`hwclock --systohc`
+`sudo hwclock {{[-w|--systohc]}}`
 
 - Write the current hardware clock time to the software clock:
 
-`hwclock --hctosys`
+`sudo hwclock {{[-s|--hctosys]}}`

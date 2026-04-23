@@ -5,7 +5,11 @@
 
 - Scan the current local network:
 
-`arp-scan --localnet`
+`arp-scan {{[-l|--localnet]}}`
+
+- Scan a specific host:
+
+`arp-scan {{10.0.0.1}}`
 
 - Scan an IP network with a custom bitmask:
 
@@ -18,3 +22,7 @@
 - Scan an IP network with a custom net mask:
 
 `arp-scan {{10.0.0.0}}:{{255.255.255.0}}`
+
+- Specify an interface to use for scanning:
+
+`arp-scan {{10.0.0.1}} {{[-I|--interface]}} {{interface_name}}`

@@ -1,7 +1,7 @@
 # pipx
 
 > Install and run Python applications in isolated environments.
-> More information: <https://github.com/pypa/pipx>.
+> More information: <https://manned.org/pipx>.
 
 - Run an app in a temporary virtual environment:
 
@@ -10,6 +10,10 @@
 - Install a package in a virtual environment and add entry points to path:
 
 `pipx install {{package}}`
+
+- Uninstall a package:
+
+`pipx uninstall {{package}}`
 
 - List installed packages:
 
@@ -26,3 +30,7 @@
 - Install a package in a virtual environment with pip arguments:
 
 `pipx install --pip-args='{{pip-args}}' {{package}}`
+
+- Upgrade/reinstall/uninstall all installed packages:
+
+`pipx {{upgrade-all|uninstall-all|reinstall-all}}`

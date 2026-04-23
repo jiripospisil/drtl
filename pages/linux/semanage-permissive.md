@@ -1,14 +1,18 @@
 # semanage permissive
 
 > Manage persistent SELinux permissive domains.
-> Note that this effectively makes the process unconfined. For long-term use, it is recommended to configure SELiunx properly.
+> Note that this effectively makes the process unconfined. For long-term use, it is recommended to configure SELinux properly.
 > See also: `semanage`, `getenforce`, `setenforce`.
-> More information: <https://manned.org/man/semanage-permissive>.
+> More information: <https://manned.org/semanage-permissive>.
 
 - List all process types (a.k.a domains) that are in permissive mode:
 
-`sudo semanage permissive {{-l|--list}}`
+`sudo semanage permissive {{[-l|--list]}}`
 
-- Set or unset permissive mode for a domain:
+- Set permissive mode for a domain:
 
-`sudo semanage permissive {{-a|--add|-d|--delete}} {{httpd_t}}`
+`sudo semanage permissive {{[-a|--add]}} {{httpd_t}}`
+
+- Unset permissive mode for a domain:
+
+`sudo semanage permissive {{[-d|--delete]}} {{httpd_t}}`

@@ -1,7 +1,7 @@
 # deluser
 
 > Delete a user from the system.
-> More information: <https://manpages.debian.org/latest/adduser/deluser.html>.
+> More information: <https://manned.org/deluser>.
 
 - Remove a user:
 
@@ -18,3 +18,7 @@
 - Remove a user, and all files owned by them:
 
 `sudo deluser --remove-all-files {{username}}`
+
+- Remove a user from a group, without deleting the user:
+
+`sudo deluser {{username}} {{group}}`

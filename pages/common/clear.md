@@ -3,15 +3,15 @@
 > Clears the screen of the terminal.
 > More information: <https://manned.org/clear>.
 
-- Clear the screen (equivalent to pressing Control-L in Bash shell):
+- Clear the screen:
 
 `clear`
 
-- Clear the screen but keep the terminal's scrollback buffer:
+- Clear the screen but keep the terminal's scrollback buffer (equivalent to pressing `<Ctrl l>` in Bash):
 
 `clear -x`
 
-- Indicate the type of terminal to clean (defaults to the value of the environment variable `TERM`):
+- Indicate the type of terminal to clean (defaults to the value of the environment variable `$TERM`):
 
 `clear -T {{type_of_terminal}}`
 

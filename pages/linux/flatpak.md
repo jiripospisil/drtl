@@ -1,15 +1,15 @@
 # flatpak
 
-> Build, install and run flatpak applications and runtimes.
+> Build, install, and run flatpak applications and runtimes.
 > More information: <https://docs.flatpak.org/en/latest/flatpak-command-reference.html#flatpak>.
 
 - Run an installed application:
 
-`flatpak run {{name}}`
+`flatpak run {{com.example.app}}`
 
 - Install an application from a remote source:
 
-`flatpak install {{remote}} {{name}}`
+`flatpak install {{remote_name}} {{com.example.app}}`
 
 - List installed applications, ignoring runtimes:
 
@@ -25,7 +25,7 @@
 
 - Remove an installed application:
 
-`flatpak remove {{name}}`
+`flatpak remove {{com.example.app}}`
 
 - Remove all unused applications:
 
@@ -33,4 +33,4 @@
 
 - Show information about an installed application:
 
-`flatpak info {{name}}`
+`flatpak info {{com.example.app}}`

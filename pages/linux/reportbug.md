@@ -1,7 +1,7 @@
 # reportbug
 
 > Bug report tool of Debian distribution.
-> More information: <https://manpages.debian.org/latest/reportbug/reportbug.html>.
+> More information: <https://manned.org/reportbug>.
 
 - Generate a bug report about a specific package, then send it by e-mail:
 
@@ -13,4 +13,4 @@
 
 - Write the bug report to a file instead of sending it by e-mail:
 
-`reportbug -o {{filename}} {{package}}`
+`reportbug {{[-o|--output]}} {{filename}} {{package}}`

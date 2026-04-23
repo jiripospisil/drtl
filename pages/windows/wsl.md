@@ -9,15 +9,15 @@
 
 - Run a Linux command without using a shell:
 
-`wsl --exec {{command}} {{command_arguments}}`
+`wsl {{[-e|--exec]}} {{command}} {{command_arguments}}`
 
 - Specify a particular distribution:
 
-`wsl --distribution {{distribution}} {{shell_command}}`
+`wsl {{[-d|--distribution]}} {{distribution}} {{shell_command}}`
 
 - List available distributions:
 
-`wsl --list`
+`wsl {{[-l|--list]}}`
 
 - Export a distribution to a `.tar` file:
 
@@ -25,7 +25,7 @@
 
 - Import a distribution from a `.tar` file:
 
-`wsl --import {{distribution}} {{path\to\install_location}} {{path/to/distro_file.tar}}`
+`wsl --import {{distribution}} {{path\to\install_location}} {{path\to\distro_file.tar}}`
 
 - Change the version of wsl used for the specified distribution:
 

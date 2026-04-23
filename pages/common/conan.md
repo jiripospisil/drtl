@@ -1,8 +1,8 @@
 # conan
 
-> The open source, decentralized and cross-platform package manager to create and share all your native binaries.
-> Some subcommands such as `conan frogarian` have their own usage documentation.
-> More information: <https://conan.io/>.
+> The open source, decentralized, and cross-platform package manager to create and share all your native binaries.
+> Some subcommands such as `frogarian` have their own usage documentation.
+> More information: <https://docs.conan.io/2/reference/commands.html>.
 
 - Install packages based on `conanfile.txt`:
 

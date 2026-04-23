@@ -1,8 +1,8 @@
 # vue
 
 > Multi-purpose CLI for Vue.js.
-> Some subcommands such as `vue build` have their own usage documentation.
-> More information: <https://cli.vuejs.org>.
+> Some subcommands such as `build` have their own usage documentation.
+> More information: <https://cli.vuejs.org/guide/>.
 
 - Create a new Vue project interactively:
 

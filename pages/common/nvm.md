@@ -1,9 +1,9 @@
 # nvm
 
-> Install, uninstall or switch between Node.js versions.
+> Install, uninstall, or switch between Node.js versions.
 > Supports version numbers like "12.8" or "v16.13.1", and labels like "stable", "system", etc.
 > See also: `asdf`.
-> More information: <https://github.com/creationix/nvm>.
+> More information: <https://github.com/nvm-sh/nvm#usage>.
 
 - Install a specific version of Node.js:
 
@@ -32,3 +32,7 @@
 - Execute a script in a specific version of Node.js:
 
 `nvm exec {{node_version}} node {{app.js}}`
+
+- Upgrade to the latest working npm version on the current Node.js version:
+
+`nvm install-latest-npm`

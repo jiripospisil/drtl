@@ -1,15 +1,16 @@
 # fc
 
-> Open the most recent command and edit it.
-> More information: <https://manned.org/fc>.
+> Open the recent commands for editing and then run them.
+> See also: `history`.
+> More information: <https://www.gnu.org/software/bash/manual/bash.html#index-fc>.
 
-- Open in the default system editor:
+- Open the last command in the default system editor and run it after editing:
 
 `fc`
 
 - Specify an editor to open with:
 
-`fc -e {{'emacs'}}`
+`fc -e '{{emacs}}'`
 
 - List recent commands from history:
 
@@ -19,6 +20,14 @@
 
 `fc -l -r`
 
-- List commands in a given interval:
+- Edit and run a command from history:
+
+`fc {{number}}`
+
+- Edit commands in a given interval and run them:
 
 `fc '{{416}}' '{{420}}'`
+
+- Display help:
+
+`fc --help`

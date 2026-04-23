@@ -2,7 +2,7 @@
 
 > Rank a list of Pacman mirrors by connection and opening speed.
 > Writes the new mirrorlist to `stdout`.
-> More information: <https://wiki.archlinux.org/index.php/mirrors>.
+> More information: <https://manned.org/rankmirrors>.
 
 - Rank a mirror list:
 
@@ -14,12 +14,12 @@
 
 - Be verbose when generating the mirrorlist:
 
-`rankmirrors -v {{/etc/pacman.d/mirrorlist}}`
+`rankmirrors {{[-v|--verbose]}} {{/etc/pacman.d/mirrorlist}}`
 
 - Test only a specific URL:
 
-`rankmirrors --url {{url}}`
+`rankmirrors {{[-u|--url]}} {{url}}`
 
 - Output only the response times instead of a full mirrorlist:
 
-`rankmirrors --times {{/etc/pacman.d/mirrorlist}}`
+`rankmirrors {{[-t|--times]}} {{/etc/pacman.d/mirrorlist}}`

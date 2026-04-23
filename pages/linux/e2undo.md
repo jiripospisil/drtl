@@ -16,10 +16,10 @@
 
 `e2undo {{path/to/undo_file}} {{/dev/sdXN}}`
 
-- Perform an undo operation and display verbose information:
+- Perform an undo operation and display [v]erbose information:
 
 `e2undo -v {{path/to/undo_file}} {{/dev/sdXN}}`
 
-- Write the old contents of the block to an undo file before overwriting a file system block:
+- Write the old contents of the block to an undo file before overwriting a filesystem block:
 
 `e2undo -z {{path/to/file.e2undo}} {{path/to/undo_file}} {{/dev/sdXN}}`

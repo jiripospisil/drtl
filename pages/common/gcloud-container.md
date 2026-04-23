@@ -2,7 +2,7 @@
 
 > Manage containerized applications on Kubernetes and clusters.
 > See also: `gcloud`.
-> More information: <https://cloud.google.com/sdk/gcloud/reference/container>.
+> More information: <https://docs.cloud.google.com/sdk/gcloud/reference/container>.
 
 - Register `gcloud` as a Docker credential helper:
 
@@ -23,3 +23,7 @@
 - List tag and digest metadata for a container image:
 
 `gcloud container images list-tags {{image}}`
+
+- Describe an existing cluster for running containers:
+
+`gcloud container clusters describe {{cluster_name}}`

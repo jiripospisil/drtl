@@ -1,17 +1,25 @@
 # mail
 
-> The command operates on the user's mailbox if no argument is given.
+> Operate on the user's mailbox.
 > To send an email the message body is built from `stdin`.
 > More information: <https://manned.org/mail>.
 
-- Send a typed email message. The command-line below continues after pressing Enter key. Input CC email-id (optional) press Enter key. Input message text (can be multiline). Press Ctrl-D key to complete the message text:
+- Open an interactive prompt to check personal mail:
 
-`mail --subject="{{subject line}}" {{to_user@example.com}}`
+`mail`
+
+- Send a typed email message with optional CC. The command-line below continues after pressing `<Enter>`. Input message text (can be multiline). Press `<Ctrl d>` to complete the message text:
+
+`mail --subject "{{subject line}}" {{to_user@example.com}} --cc "{{cc_email_address}}"`
 
 - Send an email that contains file content:
 
-`mail --subject="{{$HOSTNAME filename.txt}}" {{to_user@example.com}} < {{path/to/filename.txt}}`
+`mail < {{path/to/file.txt}} --subject "{{$HOSTNAME filename.txt}}" {{to_user@example.com}}`
 
-- Send a `tar.gz` file as an attachment:
+- Send a `.tar.gz` file as an attachment:
 
-`tar cvzf - {{path/to/directory1 path/to/directory2}} | uuencode {{data.tar.gz}} | mail --subject="{{subject_line}}" {{to_user@example.com}}`
+`tar cvzf - {{path/to/directory1 path/to/directory2}} | uuencode {{data.tar.gz}} | mail --subject "{{subject_line}}" {{to_user@example.com}}`
+
+- Display help:
+
+`mail {{[-h|--help]}}`

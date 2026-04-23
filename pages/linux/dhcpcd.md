@@ -5,8 +5,16 @@
 
 - Release all address leases:
 
-`sudo dhcpcd --release`
+`sudo dhcpcd {{[-k|--release]}}`
 
 - Request the DHCP server for new leases:
 
-`sudo dhcpcd --rebind`
+`sudo dhcpcd {{[-n|--rebind]}}`
+
+- Print (dump) the last acquired lease for a given interface:
+
+`sudo dhcpcd {{[-U|--dumplease]}} {{interface_name}}`
+
+- Print the last acquired lease for all interfaces:
+
+`sudo dhcpcd {{[-U|--dumplease]}}`

@@ -1,8 +1,8 @@
 # flutter
 
 > Google's free, open source, and cross-platform mobile app SDK.
-> Some subcommands such as `flutter pub` have their own usage documentation.
-> More information: <https://github.com/flutter/flutter/wiki/The-flutter-tool>.
+> Some subcommands such as `pub` have their own usage documentation.
+> More information: <https://github.com/flutter/flutter/blob/master/docs/tool/README.md>.
 
 - Initialize a new Flutter project in a directory of the same name:
 
@@ -27,6 +27,10 @@
 - Build a release APK targeting most modern smartphones:
 
 `flutter build apk --target-platform {{android-arm}},{{android-arm64}}`
+
+- Delete the `build` and `.dart_tool` directories:
+
+`flutter clean`
 
 - Display help about a specific command:
 

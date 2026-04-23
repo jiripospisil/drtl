@@ -2,7 +2,7 @@
 
 > Manage Linode instances.
 > See also: `linode-cli`.
-> More information: <https://www.linode.com/docs/products/tools/cli/guides/linode-instances/>.
+> More information: <https://techdocs.akamai.com/cloud-computing/docs/cli-commands-for-compute-instances>.
 
 - List all Linodes:
 
@@ -18,7 +18,7 @@
 
 - Update settings for a Linode:
 
-`linode-cli linodes update {{linode_id}} --label {{[new_label}}`
+`linode-cli linodes update {{linode_id}} --label {{new_label}}`
 
 - Delete a Linode:
 

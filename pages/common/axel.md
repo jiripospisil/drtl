@@ -1,25 +1,34 @@
 # axel
 
 > Download accelerator.
-> Supports HTTP, HTTPS, and FTP.
-> More information: <https://github.com/axel-download-accelerator/axel>.
+> Supports HTTP, HTTPS, FTP, and FTPs.
+> See also: `aria2c`.
+> More information: <https://manned.org/axel>.
 
 - Download a URL to a file:
 
 `axel {{url}}`
 
-- Download and specify an [o]utput file:
+- Download and specify an output file:
 
-`axel {{url}} -o {{path/to/file}}`
+`axel {{url}} {{[-o|--output]}} {{path/to/file}}`
 
-- Download with a specific [n]umber connections:
+- Download with a specific number connections:
 
-`axel -n {{connections_num}} {{url}}`
+`axel {{[-n|--num-connections]}} {{number}} {{url}}`
 
-- [S]earch for mirrors:
+- Use a specific number of mirrors for searching and downloading:
 
-`axel -S {{mirrors_num}} {{url}}`
+`axel {{[-S|--search=]}}{{number}} {{url}}`
 
-- Limit download [s]peed (bytes per second):
+- Limit download speed (bytes per second):
 
-`axel -s {{speed}} {{url}}`
+`axel {{[-s|--max-speed]}} {{speed}} {{url}}`
+
+- Use the IPv4 protocol only when connecting to the host:
+
+`axel {{[-4|--ipv4]}} {{url}}`
+
+- Limit output to `stdout` and use a custom user-agent when downloading:
+
+`axel {{[-q|--quiet]}} {{[-U|--user-agent]}} {{"Mozilla/5.0"}} {{url}}`

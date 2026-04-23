@@ -1,7 +1,7 @@
 # hlint
 
 > Suggest improvements to Haskell code.
-> More information: <http://hackage.haskell.org/package/hlint>.
+> More information: <https://hackage.haskell.org/package/hlint>.
 
 - Display suggestions for a given file:
 
@@ -9,7 +9,7 @@
 
 - Check all Haskell files and generate a report:
 
-`hlint {{path/to/directory}} --report`
+`hlint {{path/to/directory}} {{[-r|--report]}}`
 
 - Automatically apply most suggestions:
 

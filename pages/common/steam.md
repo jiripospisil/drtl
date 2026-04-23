@@ -11,6 +11,10 @@
 
 `steam -console`
 
+- Launch Steam without opening the GUI:
+
+`steam -silent`
+
 - Enable and open the Steam console tab in a running Steam instance:
 
 `steam steam://open/console`
@@ -22,6 +26,10 @@
 - Launch Steam in Big Picture Mode:
 
 `steam -tenfoot`
+
+- Open a URL:
+
+`steam steam://openurl/{{https://example.com}}`
 
 - Exit Steam:
 

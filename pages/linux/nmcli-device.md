@@ -1,21 +1,28 @@
 # nmcli device
 
 > Manage network interfaces and establish new Wi-Fi connections using NetworkManager.
-> This subcommand can also be called with `nmcli d`.
-> More information: <https://networkmanager.dev/docs/api/latest/nmcli.html>.
+> More information: <https://networkmanager.pages.freedesktop.org/NetworkManager/NetworkManager/nmcli.html#device>.
 
 - Print the statuses of all network interfaces:
 
-`nmcli device status`
+`nmcli {{[d|device]}}`
 
 - Print the available Wi-Fi access points:
 
-`nmcli device wifi`
+`nmcli {{[d|device]}} {{[w|wifi]}}`
 
 - Connect to a Wi-Fi network with the specified SSID (you will be prompted for a password):
 
-`nmcli --ask device wifi connect {{ssid}}`
+`nmcli {{[d|device]}} {{[w|wifi]}} {{[c|connect]}} {{ssid}} {{[-a|--ask]}}`
+
+- Create a Wi-Fi hotspot:
+
+`nmcli {{[d|device]}} {{[w|wifi]}} {{[ho|hotspot]}} ifname {{wlan0}} ssid "{{hotspot_ssid}}" password "{{password}}"`
 
 - Print the password and QR code for the current Wi-Fi network:
 
-`nmcli device wifi show-password`
+`nmcli {{[d|device]}} {{[w|wifi]}} {{[s|show-password]}}`
+
+- Print detailed information about a device:
+
+`nmcli {{[d|device]}} {{[sh|show]}} {{wlan0}}`

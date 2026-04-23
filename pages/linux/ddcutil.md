@@ -1,21 +1,30 @@
 # ddcutil
 
 > Control the settings of connected displays via DDC/CI.
-> This command requires the kernel module `i2c-dev` to be loaded. See also: `modprobe`.
-> More information: <https://www.ddcutil.com>.
+> This command requires the kernel module `i2c-dev` to be loaded.
+> See also: `modprobe`.
+> More information: <https://www.ddcutil.com/commands/>.
 
 - List all compatible displays:
 
-`ddcutil detect`
+`ddcutil {{[det|detect]}}`
 
-- Change the brightness (option 0x10) of display 1 to 50%:
+- Query the first compatible display for capabilities:
 
-`ddcutil --display {{1}} setvcp {{10}} {{50}}`
+`ddcutil {{[cap|capabilities]}}`
 
-- Increase the contrast (option 0x12) of display 1 by 5%:
+- Change the brightness (option `10`) of display 1 to 50%:
 
-`ddcutil -d {{1}} setvcp {{12}} {{+}} {{5}}`
+`ddcutil {{[-d|--display]}} 1 {{[set|setvcp]}} 10 50`
+
+- Increase the contrast (option `12`) of display 1 by 5%:
+
+`ddcutil {{[-d|--display]}} 1 {{[set|setvcp]}} 12 + 5`
+
+- Change the display source (option `60`) of a display:
+
+`ddcutil {{[-d|--display]}} {{1}} {{[set|setvcp]}} 60 0x{{0f}}`
 
 - Read the settings of display 1:
 
-`ddcutil -d {{1}} getvcp {{ALL}}`
+`ddcutil {{[-d|--display]}} 1 {{[get|getvcp]}} ALL`

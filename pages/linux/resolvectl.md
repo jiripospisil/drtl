@@ -2,7 +2,8 @@
 
 > Resolve domain names, IPv4 and IPv6 addresses, DNS resource records, and services.
 > Introspect and reconfigure the DNS resolver.
-> More information: <https://www.freedesktop.org/software/systemd/man/resolvectl.html>.
+> See also: `dig`, `nslookup`, `host`.
+> More information: <https://www.freedesktop.org/software/systemd/man/latest/resolvectl.html>.
 
 - Show DNS settings:
 
@@ -26,9 +27,9 @@
 
 - Retrieve an MX record of a domain:
 
-`resolvectl --legend={{no}} --type={{MX}} query {{domain}}`
+`resolvectl --legend {{no}} {{[-t|--type]}} {{MX}} query {{domain}}`
 
-- Resolve an SRV record, for example _xmpp-server._tcp gmail.com:
+- Resolve an SRV record, for example `_xmpp-server._tcp gmail.com`:
 
 `resolvectl service _{{service}}._{{protocol}} {{name}}`
 
